@@ -1,0 +1,111 @@
+{
+  "info": {
+    "name": "Micro Marketplace Backend",
+    "description": "All backend API requests for Micro Marketplace internship project",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Register User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"User One\",\n  \"email\": \"user1@example.com\",\n  \"password\": \"123456\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/auth/register",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["auth", "register"]
+        }
+      }
+    },
+    {
+      "name": "Login User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"user1@example.com\",\n  \"password\": \"123456\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/auth/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["auth", "login"]
+        }
+      }
+    },
+    {
+      "name": "Get Products (with search & pagination)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/products?search=Product&page=1&limit=5",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["products"],
+          "query": [
+            { "key": "search", "value": "Product" },
+            { "key": "page", "value": "1" },
+            { "key": "limit", "value": "5" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Product (protected)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"New Product\",\n  \"price\": 500,\n  \"description\": \"This is a product\",\n  \"image\": \"product.jpg\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/products",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["products"]
+        }
+      }
+    },
+    {
+      "name": "Favorite/Unfavorite Product (protected)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/products/{{productId}}/favorite",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["products", "{{productId}}", "favorite"]
+        }
+      }
+    }
+  ]
+}
